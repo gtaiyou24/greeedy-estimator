@@ -64,7 +64,7 @@ docker build -t greeedy-estimator:latest .
 
 docker container run --rm \
     -v `pwd`/app:/app \
-    -v `pwd`/data:/app/data \
+    -v `pwd`/data:/data \
     greeedy-estimator:latest train --local
 ```
 

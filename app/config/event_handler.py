@@ -11,15 +11,13 @@ from domain.model.image import ImageService
 from port.adapter.service.dataset import DatasetStorageServiceImpl
 from port.adapter.service.dataset.adapter import DatasetStorageAdapter
 from port.adapter.service.dataset.adapter.local import LocalDatasetStorageAdapter
-from port.adapter.service.dataset.adapter.sagemaker import SagemakerDatasetStorageAdapter
 from port.adapter.service.image import ImageServiceImpl
 
 
 class EventHandler:
     def startup(self) -> NoReturn:
         di_list = [
-            DI.of(DatasetStorageAdapter, {},
-                  LocalDatasetStorageAdapter if AppConfig.instance().is_local() else SagemakerDatasetStorageAdapter),
+            DI.of(DatasetStorageAdapter, {}, LocalDatasetStorageAdapter),
             DI.of(DatasetStorageService, {}, DatasetStorageServiceImpl),
             DI.of(ImageService, {}, ImageServiceImpl),
         ]

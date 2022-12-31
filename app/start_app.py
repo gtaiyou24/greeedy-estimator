@@ -2,6 +2,7 @@ import argparse
 from pathlib import Path
 
 from config import AppConfig
+from port.adapter.sagemaker import train, serve
 
 
 def main() -> None:
@@ -22,12 +23,8 @@ def main() -> None:
     AppConfig.instance(args.local, artifact_path)
 
     if args.command == "train":
-        from port.adapter.sagemaker import train
-
         train.run(dataset_path, artifact_path)
     elif args.command == "serve":
-        from port.adapter.sagemaker import serve
-
         serve.run(args.host, args.port)
     else:
         raise ValueError(f"invalid command: {args.command}")

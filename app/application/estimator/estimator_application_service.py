@@ -17,21 +17,22 @@ from domain.model.color import Color
 from domain.model.dataset import DatasetStorageService
 from domain.model.estimator.color import ColorEstimator
 from domain.model.feature import FeaturesFactory, Feature
-from domain.model.image import ImageService
 from domain.model.image.url import ImageUrl
+from port.adapter.service.dataset import DatasetStorageServiceImpl
 
 
 @singleton
 @set_logger
 class EstimatorApplicationService:
     @inject
-    def __init__(self, dataset_storage_service: DatasetStorageService, image_service: ImageService):
+    def __init__(self, dataset_storage_service: DatasetStorageService):
         self.__dataset_storage_service = dataset_storage_service
         self.__features_factory = FeaturesFactory({'アイテム名': Feature.ItemName, '画像URL': Feature.ItemImage})
-        self.__image_service = image_service
 
     def train(self, dataset_path: Path, artifact_path: Path) -> NoReturn:
         self.log.debug('start training')
+
+        self.log.debug(isinstance(self.__dataset_storage_service, DatasetStorageServiceImpl))
 
         dataset = self.__dataset_storage_service.load(dataset_path.joinpath(Path('items.csv')))
         dataset = dataset[~dataset['カラー'].isnull()][['アイテム名', '画像URL', 'カラー']]

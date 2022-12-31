@@ -18,4 +18,4 @@ WORKDIR $project_dir
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 EXPOSE 8080
-ENTRYPOINT ["python", "__main__.py"]
+ENTRYPOINT ["python", "start_app.py"]

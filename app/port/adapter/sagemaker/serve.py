@@ -18,7 +18,4 @@ def run(host: str, port: int) -> NoReturn:
     app.include_router(invocation_resource.router)
     app.include_router(ping_resource.router)
 
-    if AppConfig.instance().is_local():
-        uvicorn.run(app, host=host, port=port, reload=True)
-    else:
-        uvicorn.run(app, host=host, port=port)
+    uvicorn.run(app, host=host, port=port, reload=AppConfig.instance().is_local())
