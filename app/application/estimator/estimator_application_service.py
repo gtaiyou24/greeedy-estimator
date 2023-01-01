@@ -32,8 +32,6 @@ class EstimatorApplicationService:
     def train(self, dataset_path: Path, artifact_path: Path) -> NoReturn:
         self.log.debug('start training')
 
-        self.log.debug(isinstance(self.__dataset_storage_service, DatasetStorageServiceImpl))
-
         dataset = self.__dataset_storage_service.load(dataset_path.joinpath(Path('items.csv')))
         dataset = dataset[~dataset['カラー'].isnull()][['アイテム名', '画像URL', 'カラー']]
 

@@ -57,23 +57,23 @@ aws sagemaker delete-endpoint --endpoint-name your-endpoint-name
 ```
 
 ## Local mode
-### 1. Train a model on your local machine
 
+### 1. Build the docker image
 ```bash
 docker build -t greeedy-estimator:latest .
+```
 
+### 2. Train a model on your local machine
+```bash
 docker container run --rm \
     -v `pwd`/app:/app \
     -v `pwd`/data:/data \
     greeedy-estimator:latest train --local
 ```
 
-### 2. Serve the endpoint on your local machine
+### 3. Serve the endpoint on your local machine
 
 ```bash
-python -m app serve --local --port 8080
-
-# on your docker container
 docker build -t greeedy-estimator:latest .
 docker container run --rm \
     -v `pwd`/app:/app \
@@ -81,7 +81,7 @@ docker container run --rm \
     greeedy-estimator:latest serve --local --port 8080
 ```
 
-### 3. Train a model with local mode
+### 4. Train a model with local mode
 
 ```bash
 python scripts/train.py \
