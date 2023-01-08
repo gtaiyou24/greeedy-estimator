@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import abc
 import subprocess
-from typing import Any, Union
+from typing import Any
 
 
 class classproperty:

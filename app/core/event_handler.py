@@ -2,10 +2,11 @@ from typing import NoReturn
 
 from di import DIContainer, DI
 from fastapi import FastAPI
+from slf4py import set_logger
 
 from application.estimator import EstimatorApplicationService
 from application.estimator.dpo import LoadEstimatorDpo
-from config import AppConfig
+from core import AppConfig
 from domain.model.dataset import DatasetStorageService
 from domain.model.image import ImageService
 from port.adapter.service.dataset import DatasetStorageServiceImpl
@@ -25,6 +26,17 @@ class EventHandler:
 
     def shutdown(self) -> NoReturn:
         pass
+
+
+@set_logger
+class TrainEventHandler(EventHandler):
+    def startup(self) -> NoReturn:
+        self.log.info('start training!')
+        super().startup()
+
+    def shutdown(self) -> NoReturn:
+        self.log.info('shutdown train event')
+        super().shutdown()
 
 
 class ServeEventHandler(EventHandler):

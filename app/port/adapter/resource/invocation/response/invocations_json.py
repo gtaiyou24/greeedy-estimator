@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import List
+
 from pydantic import BaseModel, Field
 
 from application.estimator.dpo import PredictedColorsDpo
@@ -10,7 +12,7 @@ class InvocationsJson(BaseModel):
         image_url: str = Field(title='画像URL', default='')
         color: str = Field(title='カラー', default='', description='予測結果のカラー')
 
-    colors: list[InvocationsJson.Predicted] = Field(title='予測カラー一覧', default=[], description='予測されたカラーの一覧')
+    colors: List[InvocationsJson.Predicted] = Field(title='予測カラー一覧', default=[], description='予測されたカラーの一覧')
 
     @staticmethod
     def of(dpo: PredictedColorsDpo) -> InvocationsJson:

@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from config import AppConfig
+from core import AppConfig
 from port.adapter.sagemaker import train, serve
 
 

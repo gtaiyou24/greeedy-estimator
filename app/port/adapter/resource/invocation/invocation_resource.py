@@ -5,7 +5,7 @@ from fastapi import APIRouter
 from application.estimator import EstimatorApplicationService
 from application.estimator.command import PredictCommand
 from port.adapter.resource.invocation.request import InvocationsRequest
-from port.adapter.resource.invocation.response.invocations_json import InvocationsJson
+from port.adapter.resource.invocation.response import InvocationsJson
 
 router = APIRouter(
     prefix='/invocations',

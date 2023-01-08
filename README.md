@@ -29,6 +29,7 @@ aws s3 cp ./data/<filename>.csv s3://your-bucket/path/to/<filename>.csv
 python scripts/train.py \
     --dataset-path s3://greeedy-estimator/dataset \
     --artifact-path s3://greeedy-estimator/artifacts \
+    --instance-type ml.m5.2xlarge \
     --image-uri xxxxxxxxxxxx.dkr.ecr.ap-northeast-1.amazonaws.com/greeedy-estimator \
     --execution-role arn:aws:iam::xxxxxxxxxxxx:role/SageMakerExecutionRole
 ```
@@ -40,27 +41,27 @@ python scripts/train.py \
 
 ```shell
 python scripts/deploy.py \
-    --endpoint-name your-endpoint-name \
+    --endpoint-name greeedy-estimator \
     --training-job training-job-name
 ```
 
 ### 5. Invoke the endpoint
 
 ```shell
-python scripts/predict.py -n your-endpoint-name data/test.json
+python scripts/predict.py -n greeedy-estimator data/test.json
 ```
 
 ### 6. Delete the endpoint
 
 ```shell
-aws sagemaker delete-endpoint --endpoint-name your-endpoint-name
+aws sagemaker delete-endpoint --endpoint-name greeedy-estimator
 ```
 
 ## Local mode
 
 ### 1. Build the docker image
 ```bash
-docker build -t greeedy-estimator:latest .
+docker build -t greeedy-estimator:latest . -f ./Dockerfile.aws.sagemaker
 ```
 
 ### 2. Train a model on your local machine

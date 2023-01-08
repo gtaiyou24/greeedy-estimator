@@ -4,11 +4,11 @@ from typing import NoReturn
 from di import DIContainer
 
 from application.estimator import EstimatorApplicationService
-from config import EventHandler
+from core import TrainEventHandler
 
 
 def run(dataset_path: Path, artifact_path: Path) -> NoReturn:
-    handler = EventHandler()
+    handler = TrainEventHandler()
     handler.startup()
 
     application_service = DIContainer.instance().resolve(EstimatorApplicationService)

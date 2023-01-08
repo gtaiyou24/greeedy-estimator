@@ -18,7 +18,6 @@ from domain.model.dataset import DatasetStorageService
 from domain.model.estimator.color import ColorEstimator
 from domain.model.feature import FeaturesFactory, Feature
 from domain.model.image.url import ImageUrl
-from port.adapter.service.dataset import DatasetStorageServiceImpl
 
 
 @singleton
@@ -47,8 +46,8 @@ class EstimatorApplicationService:
         text_vectorizer = CountVectorizer()
         text_vectorizer.fit(X_train[:, 0])
 
-        X_train = [np.array([x for x in X_train[:, 1]]), text_vectorizer.transform(X_train[:, 0]).toarray()]
-        X_test = [np.array([x for x in X_test[:, 1]]), text_vectorizer.transform(X_test[:, 0]).toarray()]
+        X_train = [np.array(list(X_train[:, 1])), text_vectorizer.transform(X_train[:, 0]).toarray()]
+        X_test = [np.array(list(X_test[:, 1])), text_vectorizer.transform(X_test[:, 0]).toarray()]
 
         self.log.debug('特徴量データを生成しました！')
 

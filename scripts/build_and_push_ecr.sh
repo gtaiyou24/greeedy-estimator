@@ -29,7 +29,7 @@ aws ecr get-login-password --region ${region} --profile "${profile}" | docker lo
 # Build the docker image locally with the image name and then push it to ECR
 # with the full name.
 
-docker build -t ${algorithm_name} .
+docker build -t ${algorithm_name} . -f ./Dockerfile.aws.sagemaker
 docker tag ${algorithm_name} ${fullname}
 
 docker push ${fullname}

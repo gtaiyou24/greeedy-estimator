@@ -3,7 +3,7 @@ from typing import NoReturn
 import uvicorn
 from fastapi import FastAPI
 
-from config import ServeEventHandler, AppConfig
+from core import ServeEventHandler, AppConfig
 from port.adapter.resource.invocation import invocation_resource
 from port.adapter.resource.ping import ping_resource
 

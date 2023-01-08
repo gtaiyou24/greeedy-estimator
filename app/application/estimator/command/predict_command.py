@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 
 from sklearn.feature_extraction.text import CountVectorizer
@@ -12,7 +14,7 @@ class PredictCommand:
         name: str
         image_url: str
 
-    items: list[Item]
+    items: list[PredictCommand.Item]
     option_colors: set[str]
     estimator: Estimator
     vectorizer: CountVectorizer
