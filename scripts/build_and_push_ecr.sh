@@ -3,8 +3,6 @@
 algorithm_name=$1
 algorithm_name=${algorithm_name:-greeedy-estimator}
 
-dockerfile_path=$2
-
 profile=${AWS_PROFILE:-}
 account=$(aws sts get-caller-identity --query Account --output text --profile "${profile}")
 

@@ -44,6 +44,13 @@ class Color(Enum):
                 return color
         return Color.Unknown
 
+    @staticmethod
+    def value_of_en_name(en_name: str):
+        for color in Color:
+            if color.en_name() == en_name:
+                return color
+        return Color.Unknown
+
     def id(self) -> int:
         return self.__id
 
