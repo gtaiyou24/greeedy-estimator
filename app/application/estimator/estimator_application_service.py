@@ -102,7 +102,7 @@ class EstimatorApplicationService:
             y_ser = pd.Series(y, index=[e.id() for e in Color])
             if command.option_colors:
                 y_ser = y_ser[[Color.value_of_en_name(en_name).id() for en_name in command.option_colors]]
-            items[i]['color'] = Color.value_of(int(y_ser.idxmax()) - 1)
+            items[i]['color'] = Color.value_of(int(y_ser.idxmax()))
 
         return PredictedColorsDpo(
             [PredictedColorsDpo.Predicted(ImageUrl(item['url']), item['color']) for item in items.values()]
