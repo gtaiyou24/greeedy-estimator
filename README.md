@@ -79,6 +79,7 @@ docker build -t greeedy-estimator:latest .
 docker container run --rm \
     -v `pwd`/app:/app \
     -v `pwd`/data:/data \
+    -p 8080:8080 \
     greeedy-estimator:latest serve --local --port 8080
 ```
 
